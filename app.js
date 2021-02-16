@@ -51,6 +51,9 @@ app.locals.title = `${capitalized(projectName)}- ******Project of Take Notes****
 const index = require("./routes/index");
 app.use("/", index);
 
+const books = require("./routes/books");
+app.use("/", books);
+
 const auth = require("./routes/auth");
 app.use("/", auth);
 
