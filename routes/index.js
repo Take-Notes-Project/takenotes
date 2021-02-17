@@ -21,7 +21,7 @@ router.get("/", (req, res, next) => {
 
 // protected route - can only be accessed by a logged in user
 router.get('/profile', loginCheck(), (req, res) => {
-  res.render('profile');
+  res.redirect('/books');
 })
 
 module.exports = router;

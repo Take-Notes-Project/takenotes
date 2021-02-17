@@ -1,38 +1,44 @@
 {{!-- #with sets a context for an object -> i don't need to write bookDetails.title etc. --}}
 {{#with bookDetails}}
 <h1>{{title}}</h1>
-<p>Summary: {{description}}</p>
-<p>Rating: {{rating}}</p>
-<a href="/books/edit/{{_id}}">Edit this book</a>
-<a href="/books/delete/{{_id}}">Delete this book</a>
+    <p>Notes: {{description}}</p>
+    <p>Rating: {{rating}}</p>
+    <p><a href="/books/edit/{{_id}}">Edit this book</a></p>
+    <p><a href="/books/delete/{{_id}}">Delete this book</a></p>
 {{/with}}
-<h3>Written by: </h3>
+
+{{!-- <h3>Written by: </h3>
 {{#with bookDetails.author}}
-<p>{{name}} {{lastName}}</p>
-<p>Nationality: {{nationality}}</p>
-<img src="{{pictureUrl}}" height="200px">
-{{/with}}
+    <p>{{name}} {{lastName}}</p>
+    <p>Nationality: {{nationality}}</p>
+    <img src="{{pictureUrl}}" height="200px">
+{{/with}} --}}
+
 {{!-- List the reviews --}}
-<h3>Reviews</h3>
+<h2>what did you like of this Book</h2>
 {{#if bookDetails.reviews}}
-{{#each bookDetails.reviews}}
-<div>
-  <p>{{this.comments}}</p>
-  <span>{{this.user}}</span>
-</div>
-{{/each}}
+    {{#each bookDetails.reviews}}
+    <div>
+      <p>{{this.comments}}</p>
+      <span>{{this.user}}</span>
+    </div>
+    {{/each}}
 {{/if}}
 
 
 {{!-- Add a review --}}
-{{#with bookDetails}}
-<p>Add a review</p>
+{{!-- {{#with bookDetails}}
+<p>Write what was the best of this Book</p>
 <form action="/books/{{_id}}/reviews" method="POST">
-  <label for="">User: </label>
-  <input type="text" name="user">
-  <label for="">Comments: </label>
-  <input type="text" name="comments">
-  <button type="submit">Add this review</button>
-</form>
-{{/with}}
 
+  <label for="">Write a Title: </label>
+  <input type="text" name="user">
+
+  <label for="">Write your Notes : </label>
+  <input type="text" name="comments">
+
+  <button type="submit">Save your Notes </button>
+</form>
+{{/with}} --}}
+
+<h2><p><a href="/books">Go back to your Library List</a></p></h2>

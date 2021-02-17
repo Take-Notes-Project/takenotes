@@ -5,28 +5,33 @@ const Author = require('../models/Author');
 router.get('/books', (req, res) => {
   // get all the books from the database -> find() returns all the documents
   Book.find().then(booksFromDB => {
-    console.log(booksFromDB);
+    // console.log(booksFromDB);
+    const books = booksFromDB.filter(book=>{
+      // console.log("our book is:  ", typeof book.owner, typeof req.session.user._id );
+      return book.owner == req.session.user._id;
+    })
+    // console.log("books:  ", books );
     // render a books view to display them
-    res.render('books', { booksList: booksFromDB })
+    res.render('books', { booksList: books, user: req.session.user })
   }).catch(err => {
     console.log(err);
   })
 })
 
 router.post('/books', (req, res) => {
-  console.log(req.body);
+  
   const title = req.body.title;
   const author = req.body.author;
   const description = req.body.description;
   const rating = req.body.rating;
-  // const { title, author, decription, rating } = req.body; 
-  console.log('this is the author field: ', author);
-  // console.log(title, author, description, rating);
+  const user = req.session.user._id;
+console.log(" our user is: ", user);
   Book.create({
     title: title,
     author: author,
     description: description,
-    rating: rating
+    rating: rating,
+    owner: user
   })
     .then(book => {
       console.log('this book was just created: ', book);
@@ -83,19 +88,16 @@ router.get('/books/:id', (req, res) => {
 
 router.post('/books/edit/:id', (req, res) => {
   const bookId = req.params.id;
-  const title = req.body.title;
-  const author = req.body.author;
-  const description = req.body.description;
-  const rating = req.body.rating;
-  // const { title, author, decription, rating } = req.body; 
+  const user = req.session.user._id;
+  const { title, author, description, rating, comments } = req.body; 
   Book.findByIdAndUpdate(bookId, {
     title: title,
     description: description,
     author: author,
-    rating: rating
-  })
+    rating: rating,
+    }, { $push: { reviews: { user: user, comments: comments } } })
     .then(book => {
-      res.redirect(`/books/${book._id}`);
+      res.redirect(`/books/${bookId}`);
     })
     .catch(err => {
       console.log(err);
@@ -104,7 +106,7 @@ router.post('/books/edit/:id', (req, res) => {
 
 router.post('/books/:id/reviews', (req, res) => {
   const bookId = req.params.id;
-  const user = req.body.user;
+  const user = req.session.user._id;
   const comments = req.body.comments;
   console.log(user, comments);
   // const { user, comments } = req.body;
