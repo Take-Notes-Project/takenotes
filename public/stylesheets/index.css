@@ -173,7 +173,7 @@ h1 {
   border-top-color: transparent;
   border-bottom-color: transparent;
   border-left-color: transparent;
-  transform: rotate(280deg);
+  transform: rotate(180deg);
   transform-origin: center right;
 }
 
