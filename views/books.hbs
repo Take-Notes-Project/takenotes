@@ -1,15 +1,42 @@
-<h1>Books</h1>
+<h2 class="navbar">
+  <ul>
+    <h1>Welcome {{#if user}} {{user.username}} {{/if}} 👋</h1>
 
-<h1>Welcome {{#if user}} {{user.username}} {{/if}} 👋</h1>
+    <li><a href="/books/add" class="active">Add a book</a></li>
+    <li> <a href="/logout">Logout</a></li>
+  </ul>
 
-<h1>This is your list of Books of your Preference</h1>
+</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center bookshelf">
+      <h1 class="heading">Bookshelf </h1>
 
-{{#each booksList}}
-  <h2><p><a href="/books/{{this._id}}">{{this.title}}</a></p></h2>
-{{/each}}
+      {{#each booksList}}
+      <div class="book-holder">
+        <div class="book-container">
+          <div class="book">
+            <div class="book-cover">
+              <div class="cover">
+                <span class="book-title">
+                  <p><a href="/books/{{this._id}}">{{this.title}}</a></p>
+                </span>
+                <span class="book-writer">
+                  <p><a href="/books/{{this._id}}">{{this.author.lastName}}</a></p>
+                </span>
+              </div>
+            </div>
+            <div class="book-spine">
+              <h1><a href="/books/{{this._id}}">{{this.title}}</a></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
 
-<h2> <a href="/books/add">Add a book</a> </h2>
 
 
-<p><h2><a href="/logout">Logout</a></h2></p>
 
+    </div>
+  </div>
+</div>

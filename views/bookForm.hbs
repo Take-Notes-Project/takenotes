@@ -1,25 +1,38 @@
-<h1>Enter book details</h1>
-<form action="/books" method="POST">
+<div class="container">
+  <form id="contact" action="/books" method="POST">
+    <h3>Enter book details</h3>
+    <h4>please fill out all required fields </h4>
 
-  <label for="title">Title: </label>
-  <input type="text" name="title" id="title">
+    <fieldset>
+      <input placeholder="Book Title" for="title" type="text" tabindex="1" name="title" id="title">
+    </fieldset>
 
-  {{!-- <label for="author">Author: </label>
-  <input type="text" name="author" id="author"> --}}
-  {{!-- the input is now replaces with a select -> for this we need 
-  all the authors in this view --}}
-  <select name="author" id="">
-    {{#each authors}}
-      <option value="{{this._id}}">{{this.name}} {{this.lastName}}</option>
-    {{/each}}
-  </select>
+    <fieldset>
 
-  <label for="description">Description: </label>
-  <input type="text" name="description" id="description">
+      <select name="author" id="">
+        {{#each authors}}
+        <option value="{{this._id}}">{{this.name}} {{this.lastName}}</option>
+        {{/each}}
+      </select>
+    </fieldset>
 
-  <label for="rating">Rating: </label>
-  <input type="number" name="rating" id="rating">
-  <button type="submit">Add a book</button>
-</form>
+    <fieldset>
+      <input for="description" placeholder="Write Your Notes" type="text" name="description" id="description"
+        tabindex="3">
+    </fieldset>
 
-<h2><p><a href="/books">Go back to your Library List</a></p></h2>
+    <fieldset>
+      <input placeholder="Rating" type="number" name="rating" id="rating">
+    </fieldset>
+    <fieldset>
+      <button name="submit" type="submit" id="contact-submit">Submit</button>
+
+    </fieldset>
+  </form>
+
+
+</div>
+
+<h2 class="Library">
+  <p><a href="/books">Go back to your Library List</a></p>
+</h2>
