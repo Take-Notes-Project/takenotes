@@ -12,6 +12,7 @@ router.get('/books', (req, res) => {
     })
     // console.log("books:  ", books );
     // render a books view to display them
+  
     res.render('books', { booksList: books, user: req.session.user })
   }).catch(err => {
     console.log(err);
@@ -19,11 +20,7 @@ router.get('/books', (req, res) => {
 })
 
 router.post('/books', (req, res) => {
-  
-  const title = req.body.title;
-  const author = req.body.author;
-  const description = req.body.description;
-  const rating = req.body.rating;
+  const { title, author, decription, rating } = req.body; 
   const user = req.session.user._id;
 console.log(" our user is: ", user);
   Book.create({
