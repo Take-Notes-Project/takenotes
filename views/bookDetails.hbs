@@ -1,7 +1,7 @@
 {{!-- #with sets a context for an object -> i don't need to write bookDetails.title etc. --}}
 {{#with bookDetails}}
 <h1>{{title}}</h1>
-    <p>Notes: {{description}}</p>
+    <p>Resume of the Book: {{description}}</p>
     <p>Rating: {{rating}}</p>
     <p><a href="/books/edit/{{_id}}">Edit this book</a></p>
     <p><a href="/books/delete/{{_id}}">Delete this book</a></p>
@@ -15,15 +15,15 @@
 {{/with}} --}}
 
 {{!-- List the reviews --}}
-<h2>what did you like of this Book</h2>
+<h2>what are your Notes about this Book</h2>
 {{#if bookDetails.reviews}}
     {{#each bookDetails.reviews}}
     <div>
       <p>{{this.comments}}</p>
-      <span>{{this.user}}</span>
     </div>
     {{/each}}
 {{/if}}
+
 
 
 

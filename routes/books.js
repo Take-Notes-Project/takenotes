@@ -20,7 +20,7 @@ router.get('/books', (req, res) => {
 })
 
 router.post('/books', (req, res) => {
-  const { title, author, decription, rating } = req.body; 
+  const { title, author, description, rating } = req.body; 
   const user = req.session.user._id;
 console.log(" our user is: ", user);
   Book.create({
@@ -94,6 +94,7 @@ router.post('/books/edit/:id', (req, res) => {
     rating: rating,
     }, { $push: { reviews: { user: user, comments: comments } } })
     .then(book => {
+      console.log("This is Write Any Notes: ", comments);
       res.redirect(`/books/${bookId}`);
     })
     .catch(err => {

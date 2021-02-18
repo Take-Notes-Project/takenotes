@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const Book = require('./models/Book');
 const Author = require('./models/Author');
-mongoose.connect('mongodb://localhost/take-notes', {
+const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost/take-notes";
+mongoose.connect(MONGO_URI, {
   userNewUrlParser: true
 });
 
