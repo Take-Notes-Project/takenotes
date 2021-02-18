@@ -6,26 +6,26 @@ router.get('/books', (req, res) => {
   // get all the books from the database -> find() returns all the documents
   Book.find().then(booksFromDB => {
     // console.log(booksFromDB);
-    const books = booksFromDB.filter(book=>{
+    const books = booksFromDB.filter(book => {
       // console.log("our book is:  ", typeof book.owner, typeof req.session.user._id );
       return book.owner == req.session.user._id;
     })
     // console.log("books:  ", books );
     // render a books view to display them
-    res.render('books', { booksList: books, user: req.session.user })
+    res.render('books', { booksList: books, user: req.session.user, style: "books.css" })
   }).catch(err => {
     console.log(err);
   })
 })
 
 router.post('/books', (req, res) => {
-  
+
   const title = req.body.title;
   const author = req.body.author;
   const description = req.body.description;
   const rating = req.body.rating;
   const user = req.session.user._id;
-console.log(" our user is: ", user);
+  console.log(" our user is: ", user);
   Book.create({
     title: title,
     author: author,
@@ -57,7 +57,7 @@ router.get('/books/edit/:id', (req, res) => {
   Book.findById(bookId)
     .then(bookFromDB => {
       console.log(bookFromDB);
-      res.render('bookEdit', { book: bookFromDB });
+      res.render('bookEdit', { book: bookFromDB, style: 'bookEdit.css' });
     })
 })
 
@@ -65,7 +65,7 @@ router.get('/books/add', (req, res) => {
   // to render the select we also need all the authors in the view
   Author.find()
     .then(authorsFromDB => {
-      res.render('bookForm', { authors: authorsFromDB });
+      res.render('bookForm', { authors: authorsFromDB, style: "bookForm.css" });
     })
     .catch(err => {
       console.log(err);
@@ -82,20 +82,20 @@ router.get('/books/:id', (req, res) => {
     .then(book => {
       console.log(book);
       // render a book details view
-      res.render('bookDetails', { bookDetails: book });
+      res.render('bookDetails', { bookDetails: book, style: "bookDetails.css" });
     })
 })
 
 router.post('/books/edit/:id', (req, res) => {
   const bookId = req.params.id;
   const user = req.session.user._id;
-  const { title, author, description, rating, comments } = req.body; 
+  const { title, author, description, rating, comments } = req.body;
   Book.findByIdAndUpdate(bookId, {
     title: title,
     description: description,
     author: author,
     rating: rating,
-    }, { $push: { reviews: { user: user, comments: comments } } })
+  }, { $push: { reviews: { user: user, comments: comments } } })
     .then(book => {
       res.redirect(`/books/${bookId}`);
     })
