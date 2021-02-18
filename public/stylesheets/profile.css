@@ -1,18 +1,20 @@
-<<<<<<< HEAD
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
 
 a {
-  color: #00b7ff; }
+  color: #00b7ff;
+}
 
 h1 {
-  color: 15px; }
+  color: 15px;
+}
 
 /*# sourceMappingURL=style.css.map */
 
 body {
-  background-color:white;
+  background-color: white;
 }
 
 .flex-row {
@@ -154,5 +156,3 @@ body {
   opacity: 0.5;
   margin-left: 10px;
 }
-=======
->>>>>>> fd394be8ce161818b87ad2a2bb902d3fc46e1e26

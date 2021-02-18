@@ -8,7 +8,7 @@ const loginCheck = () => {
       next();
     } else {
       // otherwise redirect to /login
-      res.redirect('/login');
+      res.redirect('/login', { style: 'login.css' });
     }
   }
 }
@@ -16,12 +16,12 @@ const loginCheck = () => {
 /* GET home page */
 router.get("/", (req, res, next) => {
   const user = req.session.user;
-  res.render("index", { user: user });
+  res.render("index", { user: user, style: 'index.css' });
 });
 
 // protected route - can only be accessed by a logged in user
 router.get('/profile', loginCheck(), (req, res) => {
-  res.redirect('/books');
+  res.render('profile', { style: 'profile.css' });
 })
 
 module.exports = router;
