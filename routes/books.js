@@ -54,7 +54,7 @@ router.get('/books/delete/:id', (req, res) => {
 
 router.get('/books/edit/:id', (req, res) => {
   const bookId = req.params.id;
-  Book.findById(bookId)
+  Book.findById(bookId).populate("author")
     .then(bookFromDB => {
       console.log(bookFromDB);
       res.render('bookEdit', { book: bookFromDB, style: 'bookEdit.css' });
@@ -97,6 +97,7 @@ router.post('/books/edit/:id', (req, res) => {
     rating: rating,
   }, { $push: { reviews: { user: user, comments: comments } } })
     .then(book => {
+      console.log("This is Write Any Notes: ", comments);
       res.redirect(`/books/${bookId}`);
     })
     .catch(err => {
