@@ -5,13 +5,15 @@
   <form action="/books/edit/{{_id}}" method="POST" id="contact">
     <h3>Edit your notes</h3>
     <h4>After finishing just click on update</h4>
-    <fieldset>
+    <p>{{title}}</p>   
+    <p>{{author.name}}</p>
+    {{!-- <fieldset>
       <input placeholder="Title" type="text" tabindex="1" name="title" id="title" value="{{title}}">
-
+      
     </fieldset>
     <fieldset>
       <input placeholder="Author" type="text" tabindex="2" name="author" id="author" value="{{author.name}}{{author.lastName}}">
-    </fieldset>
+    </fieldset> --}}
     <fieldset>
       <input class="expand-height" placeholder="write here your notes" type="text" tabindex="3" name="description"
         id="description" value="{{description}}">

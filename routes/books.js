@@ -90,10 +90,11 @@ router.post('/books/edit/:id', (req, res) => {
   const bookId = req.params.id;
   const user = req.session.user._id;
   const { title, author, description, rating, comments } = req.body;
+  console.log("here is our", req.body);
   Book.findByIdAndUpdate(bookId, {
-    title: title,
+    
     description: description,
-    author: author,
+    
     rating: rating,
   }, { $push: { reviews: { user: user, comments: comments } } })
     .then(book => {
